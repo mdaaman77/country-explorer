@@ -48,7 +48,7 @@ country-explorer/
 
 ## ⚡ API Used
 
-- 🌐 https://restcountries.com/
+- 🌐 [https://restcountries.com/](https://restcountries.com/v3.1/)
 
 ---
 
