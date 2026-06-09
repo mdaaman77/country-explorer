@@ -1,35 +1,33 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function CountryCard({ country }) {
   const navigate = useNavigate();
 
   return (
-    <div
-    onClick={() => navigate(`/country/${country.cca3}`)}
-      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl hover:scale-[1.03] transition duration-300 cursor-pointer"
+    <motion.div
+      whileHover={{ scale: 1.04 }}
+      onClick={() => navigate(`/country/${country.cca3}`)}
+      className="cursor-pointer bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:shadow-xl transition"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 opacity-60" />
-
       <img
-        src={country.flags.png}
-        alt={country.name.common}
-        className="w-full h-44 object-cover group-hover:scale-110 transition duration-500"
+        src={country.flags?.png}
+        className="h-40 w-full object-cover"
       />
 
-      <div className="p-4 relative z-10">
-        <h2 className="text-lg font-semibold text-white">
-          {country.name.common}
+      <div className="p-4">
+        <h2 className="text-lg font-semibold">
+          {country.name?.common}
         </h2>
 
-        <p className="text-sm text-gray-400">
+        <p className="text-gray-400 text-sm">
           {country.region}
         </p>
 
-        <div className="mt-3 text-sm text-gray-300 space-y-1">
-          <p>👥 {country.population.toLocaleString()}</p>
-          <p>🏙 {country.capital?.[0] || "N/A"}</p>
-        </div>
+        <p className="text-sm mt-2">
+          {country.population?.toLocaleString()}
+        </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
