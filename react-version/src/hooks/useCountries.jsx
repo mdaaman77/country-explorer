@@ -4,20 +4,26 @@ import { fetchCountries } from "../api/countries";
 export function useCountries() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   useEffect(() => {
+    let active = true;
+
     (async () => {
       try {
         const data = await fetchCountries();
-        setCountries(data);
-      } catch (err) {
-        setError(err.message);
+
+        if (Array.isArray(data) && active) {
+          setCountries(data);
+        }
+      } catch (e) {
+        console.error(e);
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     })();
+
+    return () => (active = false);
   }, []);
 
-  return { countries, loading, error };
+  return { countries, loading };
 }
